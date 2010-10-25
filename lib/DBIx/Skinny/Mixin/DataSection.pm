@@ -16,6 +16,8 @@ sub register_method {
         'get_datasection_query' => sub {
             my ( $class, $section_name ) = @_;
             $class = ref $class if ref $class;
+            # TODO: use cache
+            # TODO: read other package data section.
             my $data = Data::Section::Simple->new( $class )->get_data_section;
             return $data->{$section_name} if $data->{$section_name};
             Carp::croak "could not find sql: $section_name in __DATA__ section";
@@ -28,7 +30,7 @@ __END__
 
 =head1 NAME
 
-DBIx::Skinny::Mixin::DataSection -
+DBIx::Skinny::Mixin::DataSection - get query from DATA section.
 
 =head1 SYNOPSIS
 
@@ -46,7 +48,7 @@ DBIx::Skinny::Mixin::DataSection -
 
 =head1 DESCRIPTION
 
-DBIx::Skinny::Mixin::DataSection is
+Get query from DATA section.
 
 =head1 AUTHOR
 
@@ -60,3 +62,4 @@ This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
+
